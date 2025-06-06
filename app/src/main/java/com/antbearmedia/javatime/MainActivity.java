@@ -1,13 +1,16 @@
 package com.antbearmedia.javatime;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import android.os.Handler;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private TextView timeTextView;
     private Handler handler;
@@ -21,6 +24,12 @@ public class MainActivity extends Activity {
         handler = new Handler();
 
         updateTime();
+
+        // Load SettingsFragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.settings_container, new SettingsFragment());
+        fragmentTransaction.commit();
     }
 
     private void updateTime() {
